@@ -4,9 +4,14 @@ from pymongo import MongoClient
 from bson import json_util, ObjectId
 import datetime
 import bcrypt
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
-CONNECTION_STRING = "mongodb+srv://Maze:Maze@cluster0.bjjtz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+load_dotenv()
+
+CONNECTION_STRING = os.getenv('MONGO_URI')
+print(CONNECTION_STRING)
 client = MongoClient(CONNECTION_STRING)
 db = client.get_database('myFirstDatabase')
 collection = db.get_collection('alerts')
